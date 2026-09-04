@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
+  <title>تصویرسازی جان میچل</title>
+  <defs><radialGradient id="bg" cx="70%" cy="20%"><stop stop-color="#ffb36b" stop-opacity=".45"/><stop offset="1" stop-color="#23130f"/></radialGradient></defs>
+  <rect width="240" height="240" rx="32" fill="url(#bg)"/><circle cx="42" cy="42" r="2" fill="#ffe0ae"/><circle cx="194" cy="72" r="1.5" fill="#fff"/><path d="M38 240c6-48 36-75 82-75s76 27 82 75" fill="#17111b"/><ellipse cx="120" cy="112" rx="48" ry="58" fill="#d39772"/><path d="M75 112c-4-47 14-71 48-71 34 0 54 24 48 71-6-26-22-41-48-41-25 0-39 16-48 41Z" fill="#332026"/><path d="M89 113h22m18 0h22" stroke="#20161c" stroke-width="6" stroke-linecap="round"/><path d="M112 140c8 5 16 5 24 0" fill="none" stroke="#8b4b44" stroke-width="4" stroke-linecap="round"/><path d="M95 176c16 13 34 13 50 0v35H95Z" fill="#c2764c"/>
+</svg>

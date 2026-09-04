@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
+  <title>تصویرسازی کارل شوارتزشیلد</title>
+  <defs><radialGradient id="bg" cx="26%" cy="18%"><stop stop-color="#b7a6ff" stop-opacity=".4"/><stop offset="1" stop-color="#151329"/></radialGradient></defs>
+  <rect width="240" height="240" rx="32" fill="url(#bg)"/><circle cx="46" cy="62" r="2" fill="#fff"/><circle cx="192" cy="34" r="1" fill="#d6ceff"/><path d="M35 240c12-51 38-75 85-75s73 24 85 75" fill="#171827"/><ellipse cx="120" cy="111" rx="48" ry="59" fill="#bd8366"/><path d="M70 106c-3-46 17-74 51-74 37 0 52 28 49 74-9-25-25-38-50-38-22 0-38 13-50 38Z" fill="#201c27"/><path d="M84 117c11-8 24-8 35 0m4 0c11-8 24-8 35 0" fill="none" stroke="#362531" stroke-width="5" stroke-linecap="round"/><path d="M111 140h18" stroke="#8c5149" stroke-width="4" stroke-linecap="round"/><path d="M95 176c16 13 34 13 50 0v35H95Z" fill="#5d677e"/><path d="M74 103c4 34 9 60 22 73" fill="none" stroke="#28212d" stroke-width="9"/><path d="M166 103c-4 34-9 60-22 73" fill="none" stroke="#28212d" stroke-width="9"/>
+</svg>

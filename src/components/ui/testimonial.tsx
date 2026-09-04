@@ -14,7 +14,6 @@ export interface Testimonial {
 
 interface TestimonialCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   testimonials: Testimonial[]
-  showArrows?: boolean
   showDots?: boolean
 }
 
@@ -32,25 +31,6 @@ function useReducedMotion() {
   }, [])
 
   return reduced
-}
-
-function ArrowIcon({ direction }: { direction: 'left' | 'right' }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-4 w-4"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      strokeWidth="1.8"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d={direction === 'left' ? 'M19 12H5m6-6-6 6 6 6' : 'M5 12h14m-6-6 6 6-6 6'}
-      />
-    </svg>
-  )
 }
 
 function Avatar({ name, src }: { name: string; src: string }) {
@@ -91,12 +71,11 @@ const TestimonialCarousel = React.forwardRef<
   TestimonialCarouselProps
 >(
   (
-    {
-      className = '',
-      testimonials,
-      showArrows = true,
-      showDots = true,
-      ...props
+      {
+        className = '',
+        testimonials,
+        showDots = true,
+        ...props
     },
     ref,
   ) => {
@@ -146,9 +125,6 @@ const TestimonialCarousel = React.forwardRef<
         transitionTimer.current = window.setTimeout(finish, 180)
       }
     }
-
-    const goNext = () => moveTo(currentIndex + 1, -1)
-    const goPrevious = () => moveTo(currentIndex - 1, 1)
 
     const handlePointerDown = (event: React.PointerEvent<HTMLElement>) => {
       if (isExiting) return
@@ -213,11 +189,11 @@ const TestimonialCarousel = React.forwardRef<
         ref={ref}
         className={`flex w-full flex-col items-center justify-center ${className}`}
         role="region"
-        aria-roledescription="carousel"
+        aria-roledescription="چرخ‌وفلک"
         aria-label="آرشیو نکته‌های علمی"
         {...props}
       >
-        <div className="relative h-[27rem] w-full max-w-[27rem] sm:h-[28rem]">
+        <div className="relative h-[28rem] w-full max-w-[31rem] sm:h-[29rem]">
           {testimonials.map((testimonial, index) => {
             const isCurrentCard = index === currentIndex
             const isPrevCard = index === (currentIndex + 1) % testimonials.length
@@ -253,8 +229,8 @@ const TestimonialCarousel = React.forwardRef<
               >
                 <div className="absolute inset-x-0 top-0 h-32 bg-[radial-gradient(circle_at_82%_10%,rgba(248,134,65,0.28),transparent_68%)]" />
 
-                <div className="relative flex h-full flex-col p-6 sm:p-8">
-                  <div className="mb-8 flex items-center justify-between gap-4 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-orange-200/60">
+                <div className="relative flex h-full flex-col p-5 sm:p-8">
+                  <div className="mb-7 flex items-center justify-between gap-4 text-[0.65rem] font-medium tracking-[0.2em] text-orange-200/60">
                     <span>نکته {String(index + 1).padStart(2, '0')}</span>
                     <span className="h-px flex-1 bg-white/10" />
                     <span aria-hidden="true" className="h-2 w-2 rounded-full bg-orange-300 shadow-[0_0_16px_rgba(253,186,116,0.9)]" />
@@ -268,7 +244,7 @@ const TestimonialCarousel = React.forwardRef<
                     </div>
                   </div>
 
-                  <p className="mt-8 text-[1.1rem] leading-9 text-white/80">{testimonial.description}</p>
+                  <p className="mt-7 text-[1.04rem] leading-8 text-white/80 sm:text-[1.1rem] sm:leading-9">{testimonial.description}</p>
 
                   <div className="mt-auto flex items-end justify-between gap-4 border-t border-white/10 pt-5 text-xs text-white/35">
                     <span>سیاه‌چاله‌ها، از زاویه‌ی علم</span>
@@ -285,26 +261,6 @@ const TestimonialCarousel = React.forwardRef<
                   </div>
                 </div>
 
-                {showArrows && isCurrentCard && (
-                  <div className="absolute left-5 top-5 flex gap-2" dir="ltr">
-                    <button
-                      type="button"
-                      aria-label="نکته قبلی"
-                      onClick={goPrevious}
-                      className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition-colors duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
-                    >
-                      <ArrowIcon direction="left" />
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="نکته بعدی"
-                      onClick={goNext}
-                      className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/60 transition-colors duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
-                    >
-                      <ArrowIcon direction="right" />
-                    </button>
-                  </div>
-                )}
               </article>
             )
           })}
