@@ -118,30 +118,6 @@ body {
   will-change: transform;
 }
 
-.fact-card {
-  cursor: grab;
-  transform: translate3d(var(--card-x, 0px), var(--card-y, 0px), 0) rotate(var(--card-rotation, 0deg)) scale(var(--card-scale, 1));
-  transform-origin: center center;
-  user-select: none;
-  -webkit-user-select: none;
-  will-change: transform, opacity;
-}
-
-.fact-card--dragging {
-  cursor: grabbing;
-}
-
-.fact-card:focus-visible {
-  border-color: rgba(255, 190, 131, 0.45);
-  outline: 2px solid rgba(255, 211, 164, 0.75);
-  outline-offset: 4px;
-}
-
-.fact-card a {
-  user-select: text;
-  -webkit-user-select: text;
-}
-
 [data-reveal] {
   will-change: transform, opacity;
 }
@@ -176,7 +152,6 @@ body {
 
   .hero-black-hole-layer,
   .hero-black-hole-parallax,
-  .fact-card,
   [data-reveal] {
     will-change: auto;
   }

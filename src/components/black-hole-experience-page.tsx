@@ -217,18 +217,11 @@ export default function BlackHoleExperiencePage() {
         </div>
       </section>
 
-      <section id="facts" lang="en" aria-labelledby="facts-title" className="story-section relative overflow-hidden border-t border-white/10 bg-[#08070b] px-6 py-24 sm:px-10 lg:px-20 lg:py-32">
+      <section id="facts" lang="en" aria-label="Scientific fact archive" className="story-section relative overflow-hidden border-t border-white/10 bg-[#08070b] px-6 py-24 sm:px-10 lg:px-20 lg:py-32">
         <div className="facts-ambient pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl" aria-hidden="true" />
         <div className="facts-ambient pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-500/10 blur-3xl" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-20">
-          <div data-reveal>
-            <p className="mb-5 font-mono text-xs tracking-[0.2em] text-orange-200/60">DISCOVERY ARCHIVE / 06</p>
-            <h2 id="facts-title" className="max-w-md text-3xl font-light leading-[1.35] tracking-tight text-white sm:text-5xl">Six brief facts,<br />behind a deep darkness</h2>
-            <p className="mt-6 max-w-md text-base leading-8 text-white/50">From “dark stars” to the first sound of two black holes colliding, these discoveries changed how we understand gravity.</p>
-          </div>
-          <div data-reveal>
-            <TestimonialCarousel testimonials={BLACK_HOLE_FACTS} className="mx-auto w-full max-w-[31rem]" />
-          </div>
+        <div data-reveal className="relative mx-auto flex max-w-7xl justify-center">
+          <TestimonialCarousel testimonials={BLACK_HOLE_FACTS} className="w-full max-w-[31rem]" />
         </div>
       </section>
 
