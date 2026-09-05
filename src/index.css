@@ -169,6 +169,12 @@ body::-webkit-scrollbar-thumb:hover {
   }
 }
 
+@media (pointer: coarse), (hover: none) {
+  .custom-cursor {
+    display: none;
+  }
+}
+
 .info-card {
   position: relative;
   isolation: isolate;
