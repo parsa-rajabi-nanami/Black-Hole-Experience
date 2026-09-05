@@ -5,7 +5,6 @@ gsap.registerPlugin(ScrollTrigger)
 
 const EASE = {
   cinematic: 'power3.out',
-  soft: 'power2.out',
   reveal: 'expo.out',
 }
 
@@ -16,11 +15,6 @@ export function createHeroEntrance(scope: HTMLElement) {
   })
 
   timeline
-    .fromTo(
-      select('.hero-ambient'),
-      { autoAlpha: 0, scale: 1.08 },
-      { autoAlpha: 1, scale: 1, duration: 1.4, ease: EASE.soft },
-    )
     .fromTo(
       select('.hero-black-hole-layer'),
       { autoAlpha: 0, scale: 1.035, y: 18 },
@@ -89,22 +83,6 @@ export function createScrollStory(scope: HTMLElement, mobile: boolean) {
         end: 'bottom top',
         scrub: 1.1,
       },
-    })
-  }
-
-  if (heroStage) {
-    gsap.utils.toArray<HTMLElement>('.hero-ambient', scope).forEach((element) => {
-      gsap.to(element, {
-        yPercent: mobile ? -3 : -8,
-        rotation: mobile ? 1 : 2,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: heroStage,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1.4,
-        },
-      })
     })
   }
 

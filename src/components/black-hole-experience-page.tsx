@@ -231,10 +231,6 @@ export default function BlackHoleExperiencePage() {
         <span className="custom-cursor__ring" />
         <span className="custom-cursor__dot" />
       </div>
-      <a href="#experience" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">
-        Skip to main content
-      </a>
-
       <section className="hero-stage relative min-h-[94svh] w-full md:min-h-[720px]" aria-label="Black hole introduction">
         <BlackHoleHeroSection
           focus={narrow ? [0.5, 0.36] : [0.77, 0.46]}
@@ -248,10 +244,6 @@ export default function BlackHoleExperiencePage() {
           resolution={narrow ? 0.56 : 0.7}
           maxDpr={narrow ? 1.25 : 1.5}
         >
-          <div className="hero-ambient pointer-events-none absolute inset-0 z-0" aria-hidden="true">
-            <div className="hero-ambient__glow absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-orange-500/[0.07] blur-3xl" />
-            <div className="hero-ambient__line absolute bottom-16 left-[8%] h-px w-32 bg-gradient-to-l from-orange-200/30 to-transparent" />
-          </div>
           <div className="hero-content absolute inset-y-0 left-0 z-10 flex w-full items-center">
             <div className="hero-content__inner max-w-[35rem] text-left">
               <p className="hero-kicker mb-5 font-mono text-[0.65rem] tracking-[0.22em] text-orange-200/65 sm:text-xs">BLACK HOLE / CHAPTER 01</p>
