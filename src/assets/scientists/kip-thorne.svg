@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
-  <title>تصویرسازی کیپ تورن</title>
-  <defs><radialGradient id="bg" cx="70%" cy="22%"><stop stop-color="#9bb5ff" stop-opacity=".4"/><stop offset="1" stop-color="#12172b"/></radialGradient></defs>
-  <rect width="240" height="240" rx="32" fill="url(#bg)"/><circle cx="35" cy="48" r="2" fill="#fff"/><circle cx="195" cy="86" r="1" fill="#d9e0ff"/><path d="M35 240c10-50 39-75 85-75s75 25 85 75" fill="#172033"/><ellipse cx="120" cy="112" rx="48" ry="59" fill="#c89270"/><path d="M71 106c-1-47 17-72 49-72 35 0 50 25 49 72-12-25-29-38-49-38-21 0-37 13-49 38Z" fill="#555a6c"/><path d="M84 116h30m12 0h30" stroke="#293142" stroke-width="5" stroke-linecap="round"/><path d="M111 141c6 3 12 3 18 0" fill="none" stroke="#8c4f49" stroke-width="4" stroke-linecap="round"/><path d="M95 178c15 12 35 12 50 0v33H95Z" fill="#466082"/><path d="M75 104c3 32 11 57 22 70m68-70c-3 32-11 57-22 70" fill="none" stroke="#6a6f81" stroke-width="7"/>
-</svg>

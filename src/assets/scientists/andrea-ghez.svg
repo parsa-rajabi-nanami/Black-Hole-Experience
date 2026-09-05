@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title">
-  <title>تصویرسازی آندریا گِز</title>
-  <defs><radialGradient id="bg" cx="30%" cy="18%"><stop stop-color="#ffd16e" stop-opacity=".4"/><stop offset="1" stop-color="#241a19"/></radialGradient></defs>
-  <rect width="240" height="240" rx="32" fill="url(#bg)"/><circle cx="198" cy="42" r="2" fill="#ffe8aa"/><circle cx="43" cy="62" r="1.5" fill="#fff"/><path d="M34 240c9-51 39-75 86-75s77 24 86 75" fill="#24191e"/><ellipse cx="120" cy="112" rx="48" ry="59" fill="#c8896c"/><path d="M70 108c-2-47 16-73 50-73 35 0 52 27 49 73-11-27-28-41-49-41-22 0-39 15-50 41Z" fill="#201921"/><path d="M83 116c11-8 23-8 34 0m6 0c11-8 23-8 34 0" fill="none" stroke="#422731" stroke-width="5" stroke-linecap="round"/><path d="M111 141c7 4 13 4 20 0" fill="none" stroke="#8d4f4e" stroke-width="4" stroke-linecap="round"/><path d="M96 178c15 11 33 11 48 0v33H96Z" fill="#a75f57"/><path d="M72 103c4 35 10 60 24 74m72-74c-4 35-10 60-24 74" fill="none" stroke="#2d222c" stroke-width="7"/>
-</svg>

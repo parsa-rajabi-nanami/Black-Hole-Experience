@@ -638,8 +638,10 @@ export function BlackHoleHeroSection({
 
   return (
     <div ref={hostRef} className={`black-hole-host relative isolate h-full w-full overflow-hidden bg-black ${className}`} {...rest}>
-      <div aria-hidden="true" className="black-hole-fallback absolute inset-0" />
-      <canvas ref={canvasRef} aria-hidden="true" className="pointer-events-none absolute inset-0 h-full w-full" />
+      <div aria-hidden="true" className="hero-black-hole-parallax absolute inset-0">
+        <div className="black-hole-fallback absolute inset-0" />
+        <canvas ref={canvasRef} aria-hidden="true" className="hero-black-hole-layer pointer-events-none absolute inset-0 h-full w-full" />
+      </div>
       {children ? <div className="relative z-10 h-full w-full">{children}</div> : null}
     </div>
   );
