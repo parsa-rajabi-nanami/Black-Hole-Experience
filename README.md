@@ -6,8 +6,9 @@ them. The hero is rendered with a custom WebGL pipeline, while the rest of the
 page remains useful when WebGL is unavailable.
 
 The interface is intentionally dark and editorial: warm accretion-disk light,
-local IRANSans fonts, grayscale scientist portraits, keyboard-accessible
-controls, and cards that can be browsed with either buttons or touch gestures.
+system sans-serif typography, grayscale scientist portraits,
+keyboard-accessible controls, and cards that can be browsed with either buttons
+or touch gestures.
 
 ## Stack
 
@@ -15,7 +16,6 @@ controls, and cards that can be browsed with either buttons or touch gestures.
 - TypeScript-checked TSX components
 - Tailwind CSS v4
 - Native WebGL shaders with adaptive quality and a visual fallback
-- Local font files served from `public/fonts`
 - Scientist portraits served from `public/scientists` and displayed in grayscale
 
 ## Features
@@ -87,7 +87,6 @@ Static assets live under `public/` because their URLs are stable at runtime:
 
 ```text
 public/
-├── fonts/
 └── scientists/
     ├── andrea-ghez.jpg
     ├── cape-thorn.jpg

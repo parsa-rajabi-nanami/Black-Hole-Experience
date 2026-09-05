@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { motion, type PanInfo } from 'framer-motion'
+import { motion, useReducedMotion, type PanInfo } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export interface Testimonial {
@@ -19,6 +19,8 @@ interface TestimonialCarouselProps
   testimonials: Testimonial[]
   showArrows?: boolean
   showDots?: boolean
+  ariaLabel?: string
+  itemLabel?: string
 }
 
 const CARD_EXIT_DISTANCE = 360
@@ -33,13 +35,18 @@ const TestimonialCarousel = React.forwardRef<
       testimonials,
       showArrows = true,
       showDots = true,
+      ariaLabel = 'Testimonials',
+      itemLabel = 'Testimonial',
       ...props
     },
     ref,
   ) => {
+    const shouldReduceMotion = useReducedMotion()
     const [currentIndex, setCurrentIndex] = React.useState(0)
     const [exitX, setExitX] = React.useState(0)
     const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+    const activeIndex = Math.min(currentIndex, Math.max(0, testimonials.length - 1))
+    const accessibleItemLabel = itemLabel.toLowerCase()
 
     React.useEffect(() => {
       if (currentIndex >= testimonials.length && testimonials.length > 0) {
@@ -97,14 +104,17 @@ const TestimonialCarousel = React.forwardRef<
           className="relative h-full w-full max-w-[31rem]"
           role="region"
           aria-roledescription="carousel"
-          aria-label="Testimonials"
+          aria-label={ariaLabel}
         >
+          <p className="sr-only" aria-live="polite">
+            Showing {testimonials[activeIndex].name}, item {activeIndex + 1} of {testimonials.length}
+          </p>
           {testimonials.map((testimonial, index) => {
-            const isCurrentCard = index === currentIndex
+            const isCurrentCard = index === activeIndex
             const isPrevCard =
-              index === (currentIndex + 1) % testimonials.length
+              index === (activeIndex + 1) % testimonials.length
             const isNextCard =
-              index === (currentIndex + 2) % testimonials.length
+              index === (activeIndex + 2) % testimonials.length
 
             if (!isCurrentCard && !isPrevCard && !isNextCard) return null
 
@@ -138,9 +148,9 @@ const TestimonialCarousel = React.forwardRef<
                   rotate: isCurrentCard ? exitX / 20 : isPrevCard ? -2 : -4,
                 }}
                 transition={{
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 20,
+                  ...(shouldReduceMotion
+                    ? { duration: 0 }
+                    : { type: 'spring', stiffness: 300, damping: 20 }),
                 }}
                 aria-hidden={!isCurrentCard}
               >
@@ -148,17 +158,17 @@ const TestimonialCarousel = React.forwardRef<
                   <div className="absolute inset-x-0 top-4 z-10 flex justify-between px-4">
                     <button
                       type="button"
-                      aria-label="Previous testimonial"
+                      aria-label={`Previous ${accessibleItemLabel}`}
                       onClick={() => moveTo(-1)}
-                      className="rounded-full px-2 text-2xl leading-none text-white/30 transition-colors hover:text-orange-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+                      className="flex h-11 min-w-11 items-center justify-center rounded-full px-2 text-2xl leading-none text-white/30 transition-colors hover:text-orange-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
                     >
                       &larr;
                     </button>
                     <button
                       type="button"
-                      aria-label="Next testimonial"
+                      aria-label={`Next ${accessibleItemLabel}`}
                       onClick={() => moveTo(1)}
-                      className="rounded-full px-2 text-2xl leading-none text-white/30 transition-colors hover:text-orange-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+                      className="flex h-11 min-w-11 items-center justify-center rounded-full px-2 text-2xl leading-none text-white/30 transition-colors hover:text-orange-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
                     >
                       &rarr;
                     </button>
@@ -167,7 +177,7 @@ const TestimonialCarousel = React.forwardRef<
 
                 <div className="relative flex h-full flex-col p-5 sm:p-8">
                   <div className="mt-7 mb-7 flex items-center justify-between gap-4 text-[0.65rem] font-medium tracking-[0.2em] text-orange-200/60">
-                    <span>Testimonial {String(index + 1).padStart(2, '0')}</span>
+                    <span>{itemLabel} {String(index + 1).padStart(2, '0')}</span>
                     <span className="h-px flex-1 bg-white/10" />
                     <span
                       aria-hidden="true"
@@ -226,22 +236,27 @@ const TestimonialCarousel = React.forwardRef<
                 <button
                   key={testimonial.id}
                   type="button"
-                  aria-label={`Show testimonial ${index + 1}`}
-                  aria-pressed={index === currentIndex}
+                  aria-label={`Show ${accessibleItemLabel} ${index + 1}`}
+                  aria-pressed={index === activeIndex}
                   onClick={() => {
-                    const difference = index - currentIndex
+                    const difference = index - activeIndex
                     if (difference === 0) return
 
                     const direction = difference > 0 ? 1 : -1
                     moveTo(direction, undefined, index)
                   }}
-                  className={cn(
-                    'h-2 cursor-pointer rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200',
-                    index === currentIndex
-                      ? 'w-7 bg-orange-300'
-                      : 'w-2 bg-white/20 hover:bg-white/50',
-                  )}
-                />
+                  className="flex h-11 min-w-11 cursor-pointer items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+                >
+                  <span
+                    aria-hidden="true"
+                    className={cn(
+                      'block rounded-full transition-all',
+                      index === activeIndex
+                        ? 'h-2 w-7 bg-orange-300'
+                        : 'h-2 w-2 bg-white/20 hover:bg-white/50',
+                    )}
+                  />
+                </button>
               ))}
             </div>
           )}

@@ -110,9 +110,19 @@ function useNarrow(query = '(max-width: 767px)') {
     const sync = () => setNarrow(mediaQuery.matches)
 
     sync()
-    mediaQuery.addEventListener('change', sync)
+    if (typeof mediaQuery.addEventListener === 'function') {
+      mediaQuery.addEventListener('change', sync)
+    } else {
+      mediaQuery.addListener(sync)
+    }
 
-    return () => mediaQuery.removeEventListener('change', sync)
+    return () => {
+      if (typeof mediaQuery.removeEventListener === 'function') {
+        mediaQuery.removeEventListener('change', sync)
+      } else {
+        mediaQuery.removeListener(sync)
+      }
+    }
   }, [query])
 
   return narrow
@@ -127,6 +137,9 @@ export default function BlackHoleExperiencePage() {
     let frame = 0
     let pointerX = 0
     let pointerY = 0
+    const getCursorTarget = (value: EventTarget | null) => (
+      value instanceof Element ? value.closest('a, button, [data-cursor-target]') : null
+    )
 
     const paintCursor = () => {
       root.style.setProperty('--cursor-x', `${pointerX}px`)
@@ -143,12 +156,12 @@ export default function BlackHoleExperiencePage() {
     }
 
     const onPointerOver = (event: PointerEvent) => {
-      const target = (event.target as Element).closest('a, button, [data-cursor-target]')
+      const target = getCursorTarget(event.target)
       if (target) motionScope.current?.classList.add('has-cursor-target')
     }
 
     const onPointerOut = (event: PointerEvent) => {
-      const nextTarget = (event.relatedTarget as Element | null)?.closest?.('a, button, [data-cursor-target]')
+      const nextTarget = getCursorTarget(event.relatedTarget)
       if (!nextTarget) motionScope.current?.classList.remove('has-cursor-target')
     }
 
@@ -281,7 +294,7 @@ export default function BlackHoleExperiencePage() {
 
         <div className="mx-auto mt-14 grid max-w-7xl gap-4 md:grid-cols-3">
           {BLACK_HOLE_PARTS.map((part) => (
-            <article key={part.number} data-reveal tabIndex={0} className="info-card rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 sm:p-7">
+            <article key={part.number} data-reveal className="info-card rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 sm:p-7">
               <div className="info-card__icon flex items-center justify-between text-orange-200/75"><span className="text-xs tracking-[0.2em]">{part.number}</span><PartIcon type={part.icon} /></div>
               <h3 className="mt-12 text-xl font-medium text-white">{part.title}</h3>
               <p className="mt-4 text-sm leading-7 text-white/50">{part.description}</p>
@@ -290,11 +303,23 @@ export default function BlackHoleExperiencePage() {
         </div>
       </section>
 
-      <section id="facts" lang="en" aria-label="Scientific fact archive" className="story-section relative overflow-hidden border-t border-white/10 bg-[#08070b] px-6 py-24 sm:px-10 lg:px-20 lg:py-32">
+      <section id="facts" lang="en" aria-labelledby="facts-title" className="story-section relative overflow-hidden border-t border-white/10 bg-[#08070b] px-6 py-24 sm:px-10 lg:px-20 lg:py-32">
         <div className="facts-ambient pointer-events-none absolute -left-32 top-16 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl" aria-hidden="true" />
         <div className="facts-ambient pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-violet-500/10 blur-3xl" aria-hidden="true" />
-        <div data-reveal className="relative mx-auto flex max-w-7xl justify-center">
-          <TestimonialCarousel testimonials={BLACK_HOLE_FACTS} className="w-full max-w-[31rem]" />
+        <div className="relative mx-auto max-w-7xl">
+          <div data-reveal className="mx-auto mb-8 max-w-[31rem]">
+            <p className="font-mono text-xs tracking-[0.18em] text-orange-200/60">ARCHIVE / 03</p>
+            <h2 id="facts-title" className="mt-4 text-3xl font-light tracking-tight text-white sm:text-5xl">The minds behind the mystery</h2>
+            <p className="mt-4 text-sm leading-7 text-white/50">A short archive of the people who changed what we know about black holes.</p>
+          </div>
+          <div data-reveal className="flex justify-center">
+            <TestimonialCarousel
+              testimonials={BLACK_HOLE_FACTS}
+              ariaLabel="Scientific fact archive"
+              itemLabel="Archive item"
+              className="w-full max-w-[31rem]"
+            />
+          </div>
         </div>
       </section>
 
