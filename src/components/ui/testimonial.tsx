@@ -176,7 +176,7 @@ const TestimonialCarousel = React.forwardRef<
                 )}
 
                 <div className="relative flex h-full flex-col p-5 sm:p-8">
-                  <div className="mt-7 mb-7 flex items-center justify-between gap-4 text-[0.65rem] font-medium tracking-[0.2em] text-orange-200/60">
+                  <div className="mt-12 mb-7 flex items-center justify-between gap-4 text-[0.65rem] font-medium tracking-[0.2em] text-orange-200/60">
                     <span>{itemLabel} {String(index + 1).padStart(2, '0')}</span>
                     <span className="h-px flex-1 bg-white/10" />
                     <span
@@ -231,7 +231,7 @@ const TestimonialCarousel = React.forwardRef<
           })}
 
           {showDots && (
-            <div className="absolute -bottom-8 left-0 right-0 flex justify-center gap-2">
+            <div className="absolute -bottom-12 left-0 right-0 flex justify-center gap-2">
               {testimonials.map((testimonial, index) => (
                 <button
                   key={testimonial.id}
