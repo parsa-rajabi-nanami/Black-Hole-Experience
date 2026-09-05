@@ -166,7 +166,7 @@ const TestimonialCarousel = React.forwardRef<
                 )}
 
                 <div className="relative flex h-full flex-col p-5 sm:p-8">
-                  <div className="mb-7 flex items-center justify-between gap-4 text-[0.65rem] font-medium tracking-[0.2em] text-orange-200/60">
+                  <div className="mt-7 mb-7 flex items-center justify-between gap-4 text-[0.65rem] font-medium tracking-[0.2em] text-orange-200/60">
                     <span>Testimonial {String(index + 1).padStart(2, '0')}</span>
                     <span className="h-px flex-1 bg-white/10" />
                     <span

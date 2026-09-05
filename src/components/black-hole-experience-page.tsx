@@ -8,12 +8,12 @@ import { TestimonialCarousel, type Testimonial } from './ui/testimonial'
 gsap.registerPlugin(useGSAP)
 
 const SCIENTIST_IMAGES = {
-  andreaGhez: '/scientists/andrea-ghez.jpg',
-  johnMichell: '/scientists/john-mitchell.jpg',
-  karlSchwarzschild: '/scientists/karl-schwarzschild.jpg',
-  kipThorne: '/scientists/cape-thorn.jpg',
-  rogerPenrose: '/scientists/roger-penrose.jpg',
-  stephenHawking: '/scientists/stephen-hawking.jpg',
+  andreaGhez: `${import.meta.env.BASE_URL}scientists/andrea-ghez.jpg`,
+  johnMichell: `${import.meta.env.BASE_URL}scientists/john-mitchell.jpg`,
+  karlSchwarzschild: `${import.meta.env.BASE_URL}scientists/karl-schwarzschild.jpg`,
+  kipThorne: `${import.meta.env.BASE_URL}scientists/cape-thorn.jpg`,
+  rogerPenrose: `${import.meta.env.BASE_URL}scientists/roger-penrose.jpg`,
+  stephenHawking: `${import.meta.env.BASE_URL}scientists/stephen-hawking.jpg`,
 } as const
 
 const BLACK_HOLE_FACTS: Testimonial[] = [
@@ -122,6 +122,74 @@ export default function BlackHoleExperiencePage() {
   const narrow = useNarrow()
   const motionScope = useRef<HTMLElement | null>(null)
 
+  useEffect(() => {
+    const root = document.documentElement
+    let frame = 0
+    let pointerX = 0
+    let pointerY = 0
+
+    const paintCursor = () => {
+      root.style.setProperty('--cursor-x', `${pointerX}px`)
+      root.style.setProperty('--cursor-y', `${pointerY}px`)
+      frame = 0
+    }
+
+    const onPointerMove = (event: PointerEvent) => {
+      if (event.pointerType && event.pointerType !== 'mouse') return
+
+      pointerX = event.clientX
+      pointerY = event.clientY
+      if (!frame) frame = requestAnimationFrame(paintCursor)
+    }
+
+    const onPointerOver = (event: PointerEvent) => {
+      const target = (event.target as Element).closest('a, button, [data-cursor-target]')
+      if (target) motionScope.current?.classList.add('has-cursor-target')
+    }
+
+    const onPointerOut = (event: PointerEvent) => {
+      const nextTarget = (event.relatedTarget as Element | null)?.closest?.('a, button, [data-cursor-target]')
+      if (!nextTarget) motionScope.current?.classList.remove('has-cursor-target')
+    }
+
+    window.addEventListener('pointermove', onPointerMove, { passive: true })
+    window.addEventListener('pointerover', onPointerOver, { passive: true })
+    window.addEventListener('pointerout', onPointerOut, { passive: true })
+
+    return () => {
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerover', onPointerOver)
+      window.removeEventListener('pointerout', onPointerOut)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
+  useEffect(() => {
+    const root = document.documentElement
+    let frame = 0
+
+    const updateProgress = () => {
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight
+      const progress = scrollableHeight > 0 ? window.scrollY / scrollableHeight : 0
+      root.style.setProperty('--scroll-progress', `${Math.min(1, Math.max(0, progress))}`)
+      frame = 0
+    }
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(updateProgress)
+    }
+
+    updateProgress()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
+
   useGSAP(() => {
     const scope = motionScope.current
     if (!scope) return undefined
@@ -145,6 +213,11 @@ export default function BlackHoleExperiencePage() {
 
   return (
     <main ref={motionScope} className="experience-shell min-h-screen bg-black text-white" dir="ltr">
+      <div className="scroll-progress" aria-hidden="true"><span /></div>
+      <div className="custom-cursor" aria-hidden="true">
+        <span className="custom-cursor__ring" />
+        <span className="custom-cursor__dot" />
+      </div>
       <a href="#experience" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-black">
         Skip to main content
       </a>

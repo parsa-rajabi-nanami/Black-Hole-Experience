@@ -28,6 +28,18 @@ export function createHeroEntrance(scope: HTMLElement) {
       '-=1.05',
     )
     .fromTo(
+      select('.hero-content__inner'),
+      { autoAlpha: 0, x: -72, filter: 'blur(5px)' },
+      {
+        autoAlpha: 1,
+        x: 0,
+        filter: 'blur(0px)',
+        duration: 1.05,
+        ease: EASE.reveal,
+      },
+      '-=0.7',
+    )
+    .fromTo(
       select('.hero-kicker, .hero-title, .hero-description, .hero-actions, .hero-scroll-cue'),
       { autoAlpha: 0, y: 22, filter: 'blur(8px)' },
       {

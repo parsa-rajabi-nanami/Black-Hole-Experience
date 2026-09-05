@@ -46,6 +46,24 @@ npm run build
 npm run preview
 ```
 
+## Deploy to GitHub Pages
+
+The Vite base path is configured for this repository's project site:
+`/Black-Hole-Experience/`. To publish the production build to the `gh-pages`
+branch, run:
+
+```bash
+npm install
+npm run lint
+npm run typecheck
+npm run deploy
+```
+
+Then, in GitHub, open `Settings → Pages`, choose `Deploy from a branch`, select
+the `gh-pages` branch and the `/ (root)` folder, and save. The site will be
+available at:
+`https://parsa-rajabi-nanami.github.io/Black-Hole-Experience/`
+
 `npm run typecheck` validates the TypeScript components even though the main
 entry points are JavaScript. There is no automated test runner configured yet;
 manual browser verification is currently the source of truth for the WebGL
