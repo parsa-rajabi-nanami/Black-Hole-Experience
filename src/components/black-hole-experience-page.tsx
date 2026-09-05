@@ -103,7 +103,11 @@ function PartIcon({ type }: { type: string }) {
 }
 
 function useNarrow(query = '(max-width: 767px)') {
-  const [narrow, setNarrow] = useState(false)
+  const [narrow, setNarrow] = useState(() => (
+    typeof window !== 'undefined'
+      && typeof window.matchMedia === 'function'
+      && window.matchMedia(query).matches
+  ))
 
   useEffect(() => {
     const mediaQuery = window.matchMedia(query)
